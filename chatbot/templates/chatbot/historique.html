@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Historique du Chatbot</title>
+</head>
+<body>
+    <h1>📜 Historique des interactions</h1>
+    <p><a href="{% url 'export_excel' %}">⬇️ Exporter en Excel</a></p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Date</th>
+            <th>Question</th>
+            <th>Réponse</th>
+            <th>Solution</th>
+        </tr>
+        {% for item in interactions %}
+        <tr>
+            <td>{{ item.date|date:"Y-m-d H:i" }}</td>
+            <td>{{ item.question }}</td>
+            <td>{{ item.reponse }}</td>
+            <td>{{ item.solution }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Aucune interaction enregistrée.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{% url 'home' %}">⬅ Retour à l'accueil</a></p>
+</body>
+</html>
