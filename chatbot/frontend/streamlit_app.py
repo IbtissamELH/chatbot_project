@@ -1,19 +1,27 @@
-
-
-# frontend/streamlit_app.py
+# streamlit_app.py
 import streamlit as st
-from backend.chatbot_engine import ChatbotEngine
+import pandas as pd
+from sentence_transformers import SentenceTransformer, util
 
-# Initialiser le chatbot
-engine = ChatbotEngine("chatbot_data/chatbot_anomalies_roulements_20000.xlsx")
+# Charger le dataset
+df = pd.read_excel("chatbot_data/chatbot_anomalies_roulements_20000.xlsx")
 
-st.title("🤖 Chatbot de Maintenance Prédictive")
-user_input = st.text_input("Posez une question sur une anomalie mécanique :")
+# Charger le modèle BERT
+model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+embeddings = model.encode(df['Question'].tolist(), convert_to_tensor=True)
+
+# Interface Streamlit
+st.title("🤖 Chatbot IA sur les anomalies mécaniques")
+
+user_input = st.text_input("Pose ta question :")
 
 if user_input:
-    result = engine.get_response(user_input)
-    st.subheader("Réponse détectée :")
-    st.write(f"**Question reconnue :** {result['question_trouvée']}")
-    st.write(f"**Réponse :** {result['réponse']}")
-    st.write(f"**Solution recommandée :** {result['solution']}")
-    st.write(f"**Type d'anomalie :** {result['type_anomalie']}")
+    query_embedding = model.encode(user_input, convert_to_tensor=True)
+    scores = util.pytorch_cos_sim(query_embedding, embeddings)[0]
+    best_idx = scores.argmax().item()
+    best_match = df.iloc[best_idx]
+
+    st.markdown(f"**Question correspondante :** {best_match['Question']}")
+    st.markdown(f"**Réponse :** {best_match['Réponse']}")
+    st.markdown(f"**Solution :** {best_match['Solution']}")
+    st.markdown(f"**Type d'anomalie :** {best_match['Type d\'anomalie']}")
