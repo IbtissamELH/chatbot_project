@@ -1,0 +1,19 @@
+{% extends 'chatbot/base.html' %}
+{% block title %}Profil - ChatMI{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="mb-4 text-center">👤 Mon Profil</h2>
+      <div class="card shadow-sm p-4">
+        <p><strong>Nom d’utilisateur :</strong> {{ user.username }}</p>
+        <p><strong>Email :</strong> {{ user.email }}</p>
+        <p><strong>Rôle :</strong> Utilisateur Authentifié</p>
+
+        <hr>
+        <a href="{% url 'logout' %}" class="btn btn-danger w-100">Se déconnecter</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

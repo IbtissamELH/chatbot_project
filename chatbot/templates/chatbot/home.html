@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil Chatbot</title>
-</head>
-<body>
-    <h1>Bienvenue sur le Chatbot de Maintenance Prédictive</h1>
-    <p><a href="/chat/">Accéder au chatbot</a></p>
+{% extends 'chatbot/base.html' %}
+{% block title %}Accueil - ChatMI{% endblock %}
 
-</body>
-</html>
+{% block content %}
+  <div class="text-center mt-5">
+    <h1>Bienvenue sur <strong>ChatMI</strong> 🤖</h1>
+    <p>Votre assistant intelligent pour la maintenance des machines</p>
+    <a href="{% url 'chat_messenger' %}" class="btn btn-primary">Commencer à discuter</a>
+  </div>
+{% endblock %}

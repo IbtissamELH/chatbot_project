@@ -17,3 +17,4 @@ if user_input:
     st.write(f"**Réponse :** {result['réponse']}")
     st.write(f"**Solution recommandée :** {result['solution']}")
     st.write(f"**Type d'anomalie :** {result['type_anomalie']}")
+

@@ -25,3 +25,6 @@ if user_input:
     st.markdown(f"**Réponse :** {best_match['Réponse']}")
     st.markdown(f"**Solution :** {best_match['Solution']}")
     st.markdown(f"**Type d'anomalie :** {best_match['Type d\'anomalie']}")
+
+
+    

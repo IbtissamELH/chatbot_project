@@ -1,0 +1,18 @@
+{% extends 'chatbot/base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3 mt-5">
+  <h2>Connexion</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label>Nom d'utilisateur</label>
+      <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" name="password" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
+  </form>
+</div>
+{% endblock %}
